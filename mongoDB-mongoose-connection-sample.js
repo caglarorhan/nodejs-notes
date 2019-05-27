@@ -76,17 +76,90 @@ const Course = mongoose.model('Course', courseSchema); // we create a class (mod
 // }
 // getSomeCourses().then(()=> console.log('Some course listed!'))
 
+//
+// // GET COURSES IN SOME ORDER
+// in sort object, for ascending order use : 1 or "asc" or "ascending"
+// in sort object, for descending order use : -1 or "desc" or "descending"
+// async function getSomeCoursesInOrder(){
+//     const courses = await Course
+//         .find({
+//
+//     })
+//         .limit(2)
+//         .sort({
+//             author: 1
+//         })
+//     console.log(courses)
+// }
+// getSomeCoursesInOrder().then(()=> console.log('Some course listed in an order!'))
 
-// GET COURSES IN SOME ORDER
-async function getSomeCoursesInOrder(){
+//
+// // GET COURSES IN SOME ORDER
+// async function getSomeCoursesPropertiesInOrder(){
+//     const courses = await Course
+//         .find({
+//
+//     })
+//         .limit(2)
+//         .select({
+//          name: 1, tags:1
+//         })
+//     console.log(courses)
+// }
+// getSomeCoursesPropertiesInOrder().then(()=> console.log('Some course listed in an order!'))
+
+
+
+
+
+// // OPERATORS
+// async function getSomeCoursesInACondition(){
+//     // eq (equal)
+//     // ne (not equal)
+//     // gt (greater than)
+//     // gte (greater than and equal to)
+//     // lt (less than)
+//     // lte (less than or equal to)
+//     // in
+//     // nin (not in)
+//     const courses = await Course
+//         .find({price: {$in: [10,12,8]}})
+//         //.find({price: {$in: [10,12,8]}})
+//         //.find({price: {$gte:10, $lte:14}})
+//
+//     console.log(courses)
+// }
+// getSomeCoursesInACondition().then(()=> console.log('Some course listed in an order!'))
+
+//
+// // OR & AND operators
+// async function getSomeCoursesInACondition(){
+//     // eq (equal)
+//     // ne (not equal)
+//     // gt (greater than)
+//     // gte (greater than and equal to)
+//     // lt (less than)
+//     // lte (less than or equal to)
+//     // in
+//     // nin (not in)
+//     const courses = await Course
+//         .find()
+//     //.or([ {author: 'Caglar'},{ isPublished: true} ])
+//         .and( [{price: {$lt:14}}, {isPublished: false}])
+//
+//     console.log(courses)
+// }
+// getSomeCoursesInACondition().then(()=> console.log('Some course listed in an order!'))
+
+
+
+// Regular Expression
+async function getSomeCoursesInACondition(){
     const courses = await Course
-        .find({
-
-    })
-        .limit(2)
-        .sort({
-            author: 1
-        })
+        .find({author:/^Ah/})
+        //.find({author:/pattern/}) pattern is regular expression, if a string pattern at the beginning of use caret ^ char in front of it
+        //.find({author:/met$/}) // Strings that ending with met, this is case sensitive
+        //.find({author:/Met$/i}) // this is case insensitive
     console.log(courses)
 }
-getSomeCoursesInOrder().then(()=> console.log('Some course listed in an order!'))
+getSomeCoursesInACondition().then(()=> console.log('Some course listed in an order!'))
