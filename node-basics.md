@@ -90,9 +90,17 @@ Bu dosyada degiskenlere NODE_ENV degiskeni adi verilir
       }
     }
 //
-asagidaki sekilde cli icinden degistirilir
+asagidaki sekilde **cli** icinden degistirilir
 
     set app_password=56789
 
 
+--- belirli bir namespace icindeki debug mesajlari icin ``debug`` isimli modulu kullaniriz
+`npm install debug`
 
+Daha sonra bunlari
+
+    const startupDebugger = require('debug')('app:startup');
+    const dbDebugger = require('debug')('app:db');
+
+seklinde require ettikten sonra cli de debug mesalarini gorebiliriz.
