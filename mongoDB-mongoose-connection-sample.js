@@ -24,7 +24,8 @@ const courseSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    isPublished: Boolean
+    isPublished: Boolean,
+    price: Number
 
 })
 
@@ -150,18 +151,52 @@ const Course = mongoose.model('Course', courseSchema); // we create a class (mod
 //     console.log(courses)
 // }
 // getSomeCoursesInACondition().then(()=> console.log('Some course listed in an order!'))
+//
+//
+//
+// // Regular Expression
+// async function getSomeCoursesInACondition(){
+//     const courses = await Course
+//         .find({author: /.*gla.*/})
+//         //.find({author:/^Ah/})
+//         //.find({author:/pattern/}) pattern is regular expression, if a string pattern at the beginning of use caret ^ char in front of it
+//         //.find({author:/met$/}) // Strings that ending with met, this is case sensitive
+//         //.find({author:/Met$/i}) // this is case insensitive (/i sign)
+//         //find({author: /.*hme.*/}) // includes hme at anywhere in the string
+//     console.log(courses)
+// }
+// getSomeCoursesInACondition().then(()=> console.log('Some course listed in an order!'))
 
 
 
-// Regular Expression
+//
+//
+//
+// // count of results
+// async function getSomeCoursesInACondition(){
+//     const courses = await Course
+//         .find({author: /.*gla.*/})
+//         .count()
+//     console.log(courses)
+// }
+//
+// getSomeCoursesInACondition().then(()=> console.log('Done'))
+//
+
+
+
+
+
+// Pagination
 async function getSomeCoursesInACondition(){
+    const pageNumber = 2;
+    const pageSize = 3;
+
     const courses = await Course
-        .find({author: /.*gla.*/})
-        //.find({author:/^Ah/})
-        //.find({author:/pattern/}) pattern is regular expression, if a string pattern at the beginning of use caret ^ char in front of it
-        //.find({author:/met$/}) // Strings that ending with met, this is case sensitive
-        //.find({author:/Met$/i}) // this is case insensitive (/i sign)
-        //find({author: /.*hme.*/}) // includes hme at anywhere in the string
+        .find()
+        .skip((pageNumber-1)*pageSize)
+        .limit(pageSize)
     console.log(courses)
 }
-getSomeCoursesInACondition().then(()=> console.log('Some course listed in an order!'))
+
+getSomeCoursesInACondition().then(()=> console.log('Done'))
