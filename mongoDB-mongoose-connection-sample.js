@@ -156,10 +156,12 @@ const Course = mongoose.model('Course', courseSchema); // we create a class (mod
 // Regular Expression
 async function getSomeCoursesInACondition(){
     const courses = await Course
-        .find({author:/^Ah/})
+        .find({author: /.*gla.*/})
+        //.find({author:/^Ah/})
         //.find({author:/pattern/}) pattern is regular expression, if a string pattern at the beginning of use caret ^ char in front of it
         //.find({author:/met$/}) // Strings that ending with met, this is case sensitive
-        //.find({author:/Met$/i}) // this is case insensitive
+        //.find({author:/Met$/i}) // this is case insensitive (/i sign)
+        //find({author: /.*hme.*/}) // includes hme at anywhere in the string
     console.log(courses)
 }
 getSomeCoursesInACondition().then(()=> console.log('Some course listed in an order!'))
