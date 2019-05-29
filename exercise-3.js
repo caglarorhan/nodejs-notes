@@ -23,7 +23,7 @@ async function getAllCourses(){
         .or([
             {
             isPublished:true,
-            name: /.*by.*/
+            name: /.*by.*/i
             },
             {
             isPublished:true,
