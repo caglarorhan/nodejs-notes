@@ -74,13 +74,42 @@ mongoose.connect('mongodb://localhost/mongo-exercises')
 //
 //
 
+//
+//
+// // enum checks if data is in the array or not (category enum property) + min max values for numbers
+// const courseSchema = new mongoose.Schema({
+//     _id: String,
+//     name: {
+//         type: String,
+//         required: true,
+//         minlength: 5,
+//         maxlength:255,
+//         // match: /pattern/
+//     },
+//     author: String,
+//     tags: [ String ],
+//     category:{
+//         type: String,
+//         required: true,
+//         enum: ['new','mobile','front-end','back-end','network']
+//     },
+//     date: {
+//         type: Date,
+//         default: Date.now
+//     },
+//     isPublished: Boolean,
+//     price: {
+//         type: Number,
+//         required: function(){ return this.isPublished},
+//         min:100,
+//         max: 500
+//     }
+// })
 
 
 
 
-
-
-// enum checks if data is in the array or not (category enum property)
+// Custom validators
 const courseSchema = new mongoose.Schema({
     _id: String,
     name: {
@@ -91,11 +120,17 @@ const courseSchema = new mongoose.Schema({
         // match: /pattern/
     },
     author: String,
-    tags: [ String ],
+    tags: {
+        type: Array,
+        validate: function(v){
+            return v && v.length > 0
+        },
+        message: 'A course should have at least one tag '
+    },
     category:{
-      type: String,
-      required: true,
-      enum: ['new','mobile','front-end','back-end','network']
+        type: String,
+        required: true,
+        enum: ['new','mobile','front-end','back-end','network']
     },
     date: {
         type: Date,
@@ -104,7 +139,9 @@ const courseSchema = new mongoose.Schema({
     isPublished: Boolean,
     price: {
         type: Number,
-        required: function(){ return this.isPublished}
+        required: function(){ return this.isPublished},
+        min:100,
+        max: 500
     }
 })
 
