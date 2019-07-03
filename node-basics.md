@@ -122,6 +122,8 @@ seklinde require ettikten sonra cli de debug mesajlarini gorebiliriz.
 
 **TESTS**
 
+Tests are important as the production code. They are first-class citizens :)
+
 **Types of Test**
 - Unit
 - Integration
@@ -158,5 +160,67 @@ runs the command. If we use ``jest`` in place of ``COMMAND`` it will run ``jest`
 
 Jest runs test in ``spec`` or ``test`` `.js files`
 
-- Create test files in ``tests`` folder with ``filename.test.js`` format. Filename is the targeted js files name.
+- Create test files in ``tests`` folder with ``modulename.test.js`` format. Module name is the targeted js files name.
 
+- in this file using builtin jest function ``test()`` which accept 2 arguments. First argument is the name of our test, we see this in command line. Second argument is a function which runs when we call this test.
+
+- In this function there must be unit tests count as much as execution path counts.
+- Execution paths are decision to return something and done with the function.
+
+    // Testing numbers
+    
+in ``text.js`` file
+    
+    module.exports.absolute = function(number) {
+        if(number > 0 ) return number; //1
+        if(number < 0 ) return -number; //2 
+        return 0; // 3
+    }
+
+In the function above, there are 3 execution paths that shown with numbers.
+These paths must have covered in test file.
+
+> lib.test.js file code is like this
+
+    const lib = require('../lib'); // require origin js file
+    //first execution path test
+    test('absolute - should return positive number if input is positive', ()=>{
+        const result = lib.absolute(1);
+        expect(result).toBe(1);
+    })
+    //second execution path test
+    test('absolute - should return positive number if input is negative', ()=>{
+        const result = lib.absolute(-1);
+        expect(result).toBe(1);
+    })
+    //third execution path test
+    test('absolute - should return zero if input is zero', ()=>{
+        const result = lib.absolute(0);
+        expect(result).toBe(0);
+    })
+    
+**Grouping Tests**    
+
+Always group related test in ``describe`` block. And use ``it`` function instead of ``test`` function.
+
+    const lib = require('../lib'); // require origin js file
+    describe('absolute', ()=>{
+    
+    it('should return positive number if input is positive', ()=>{
+            const result = lib.absolute(1);
+            expect(result).toBe(1);
+        })
+        //second execution path test
+        it('should return positive number if input is negative', ()=>{
+            const result = lib.absolute(-1);
+            expect(result).toBe(1);
+        })
+        //third execution path test
+        it('should return zero if input is zero', ()=>{
+            const result = lib.absolute(0);
+            expect(result).toBe(0);
+        })
+ 
+    });
+    
+    
