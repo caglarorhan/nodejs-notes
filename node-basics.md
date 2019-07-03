@@ -200,7 +200,7 @@ These paths must have covered in test file.
     })
     
 **Grouping Tests**    
-
+``absolute`` is test name pattern. In grouping we can give this name to group instead of tests.
 Always group related test in ``describe`` block. And use ``it`` function instead of ``test`` function.
 
     const lib = require('../lib'); // require origin js file
@@ -224,3 +224,24 @@ Always group related test in ``describe`` block. And use ``it`` function instead
     });
     
     
+Unit test must be not too general and not too specific. If so it would be easily break.
+
+instead of this
+
+    describe('greet', ()=>{
+        it('should return greeting message',()=>{
+            const result = lib.greet('Caglar');
+                expect(result).toBe('Welcome Caglar');
+        })
+    })
+
+use this
+
+    describe('greet', ()=>{
+        it('should return greeting message',()=>{
+            const result = lib.greet('Caglar');
+                expect(result).toMatch(/Caglar/); // Regular Expressions
+                //OR
+                expect(result).toContain('Caglar');
+        })
+    })    
