@@ -129,6 +129,9 @@ Tests are important as the production code. They are first-class citizens :)
 - Integration
 - End-to-end
 
+
+
+
 **Test Pyramid**
 
 Unit tests at the base of pyramid. Most of test are unit test. Easy to write, written quickly. Edge cases tested with unit test.
@@ -245,3 +248,46 @@ use this
                 expect(result).toContain('Caglar');
         })
     })    
+
+If we want to test multiple conditions in an array
+
+
+describe('registerUser', ()=>{
+
+        it('should throw if username is falsy', ()=>{
+            // null
+            // undefined
+            // NaN
+            // ''
+            // 0
+            // false
+    
+         //const result = lib.registerUser(null); // this is not working in toThrow
+            // we are going to use another approach
+            const args = [null, undefined, NaN, '', 0, false];
+            args.forEach( a=>{
+                expect(()=>{lib.registerUser(a)}).toThrow();
+            });
+    
+        })
+    
+         //happy path
+         it('should return a user object if valid username is passed', ()=>{
+             const result = lib.registerUser('Caglar');
+             expect(result).toMatchObject({username:'Caglar'});
+             //we cant control id because in the registeredUser function id is current time and it would be passed till we check it in unit test
+             // but we can control if it is greater than the function run time value at least.
+             expect(result.id).toBeGreaterThan(0);
+         })
+    
+    });
+    
+**Testing Continually**
+
+Configure package.json     
+
+    "scripts" : {
+       "test": "jest --watchAll"         
+    }
+
+
