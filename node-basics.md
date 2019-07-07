@@ -281,6 +281,11 @@ describe('registerUser', ()=>{
          })
     
     });
+
+- **Unit tests are**
+    - Easy to write
+    - Fast to execute
+    - Ideal for testing algorithms    
     
 **Testing Continually**
 
@@ -290,4 +295,37 @@ Configure package.json
        "test": "jest --watchAll"         
     }
 
+---
 
+In unit test, you should not contact any external resources like databases. If so that will be an integration test. Bu we can use mock implementation. This means for example we can indirectly connect to a database. For this we use fake/mock functions. This is as easy as overwriting the original function.
+
+Like if ``db.getCustomerSync`` function is original, but we will use 
+
+
+    db.getCustomerSync = (userId)=> {
+        //our test
+        console.log('Fake db connection. Reading from db ;-) ');
+        return {userId: userId, points:20}
+    }
+
+**Jest Mock Functions**
+
+Jest has built-in mock function. This is an empty function. We can fill it with anything.
+
+    const mockFunction = jest.fn();
+    //mockFunction.mockReturnValue(1) // 1 may be any value
+    
+    mockFunction.mockResolvedValue(1); // this returns a Promise
+    //mockFunction.mockRejectedValue(new Error('....')); // for rejecting
+    const result = await mockFunction();
+    
+**Integration Testing**
+
+Here is the real tests, for example database document CRUD processes.
+In config folder, create ``test.json`` and paste all ``default.json`` content in it (db, JWTkey etc.) after that change db connection string into test database connection string.
+
+**Test Driven Development (TDD)**
+
+- Write failing test
+- Write simplest code to make the test past
+- Refactor if necessary
