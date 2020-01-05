@@ -4,7 +4,7 @@
   "description": "",
   "main": "hello-world.js",
   "dependencies": {
-    "mongoose": "^5.5.11"
+    "mongoose": "^5.7.5"
   },
   "devDependencies": {
     "jest": "^24.8.0"
