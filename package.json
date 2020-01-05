@@ -1,0 +1,26 @@
+{
+  "name": "nodejs_basics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello-world.js",
+  "dependencies": {
+    "mongoose": "^5.5.11"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caglarorhan/nodejs_basics.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caglarorhan/nodejs_basics/issues"
+  },
+  "homepage": "https://github.com/caglarorhan/nodejs_basics#readme"
+}

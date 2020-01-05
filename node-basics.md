@@ -1,4 +1,40 @@
 **Node Basic Notes**
+
+**Node CLI Kullanimi**
+cli uzerinden parametre/komut gondermek icin `node app.js komutlar` ile argumanlar seklinde gonderilir.
+ Node tarafinda da `process.argv` ile gelen degerler dizi olarak alinir. Detayli bilgi icin https://nodejs.org/api/process.html#process_process_argv bakiniz.
+
+**https Module**
+Built-in moduldur. Agent nesnesi olarak calisir, pek cok kullanisli sinifi ve methodu vardir.
+Ornegin `https.createServer`, `https.get`, `https.request` gibi.
+
+**https.request(url,callback)**
+    
+    const url='https://www/google.com';
+    data = "";
+    const request = https.request(url, (response)=>{
+    
+        response.on('data', (chunk)=>{
+            data = data + chunk.toString(); // chunk okunabilir metne donusur
+        });
+        response.on('end', ()=>{
+            const body = JSON.parse(data); // karmasik okunaiblir metin aslinda json yapisindadir,
+                                           //simdi duzenli json nesnesine donusur
+            console.log(body): //duzenli okunakli json nesnesi
+        });
+        
+        request.on('error', (error)=>{
+            console.log('An error:', error);
+        });
+        
+        
+     request.end();   
+        
+        
+    }) 
+    
+
+
 ---
 **Re**presentational **S**tate **T**ransfer
 
@@ -110,6 +146,10 @@ seklinde require ettikten sonra cli de debug mesajlarini gorebiliriz.
 
 
 ---
+
+**package.json**
+- ``start`` disindaki komutlari ``scripts`` bolumune ekledigimizde calismasi icin ``cli`` icinde ``npm run komutAdi``  seklinde kullanmaliyiz. ``start`` bunun istisnasi olarak dogrudan ``nmp start`` seklinde kullanilabilir.
+
 
 **YAYGIN PAKETLER ve KULLANIM AMACLARI**
 
@@ -329,3 +369,31 @@ In config folder, create ``test.json`` and paste all ``default.json`` content in
 - Write failing test
 - Write simplest code to make the test past
 - Refactor if necessary
+
+**Benefits of TDD**
+
+- Testable source code
+- Full coverage by tests
+- Simpler implementation
+
+
+**DEPLOYMENT**
+
+There are two main options
+ - PaaS (Platform as a Server)
+     - Heroku
+     - Google
+     - AWS
+     - Azure
+ - Docker (install any servers)  
+
+---
+**Heroku**
+Some modules
+- **helmet** module is prevent from well known vulnerabilities.
+- **compression** sent http response to the client
+
+---
+
+**Express.js Framework**
+
